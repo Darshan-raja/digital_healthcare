@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Registration - HealthCare Portal</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhealthcare3944back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header with Trust Signals -->
+    <header class="bg-surface border-b border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HealthCare Portal</h1>
+                        <p class="text-xs text-text-secondary">Secure Medical Platform</p>
+                    </div>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-alt text-secondary text-sm"></i>
+                        <span class="text-xs text-text-secondary">HIPAA Compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-lock text-primary text-sm"></i>
+                        <span class="text-xs text-text-secondary">SSL Secured</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-certificate text-warning text-sm"></i>
+                        <span class="text-xs text-text-secondary">Medical Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Trust Badges Mobile -->
+            <div class="md:hidden flex justify-center space-x-4 mb-6">
+                <div class="flex items-center space-x-1 bg-secondary-50 px-2 py-1 rounded-md">
+                    <i class="fas fa-shield-alt text-secondary text-xs"></i>
+                    <span class="text-xs text-secondary">HIPAA</span>
+                </div>
+                <div class="flex items-center space-x-1 bg-primary-50 px-2 py-1 rounded-md">
+                    <i class="fas fa-lock text-primary text-xs"></i>
+                    <span class="text-xs text-primary">SSL</span>
+                </div>
+                <div class="flex items-center space-x-1 bg-warning/10 px-2 py-1 rounded-md">
+                    <i class="fas fa-certificate text-warning text-xs"></i>
+                    <span class="text-xs text-warning">Certified</span>
+                </div>
+            </div>
+
+            <!-- Authentication Card -->
+            <div class="card">
+                <!-- Tab Navigation -->
+                <div class="flex border-b border-border mb-6">
+                    <button id="loginTab" class="flex-1 py-3 px-4 text-center font-medium text-primary border-b-2 border-primary transition-colors duration-200">
+                        Sign In
+                    </button>
+                    <button id="registerTab" class="flex-1 py-3 px-4 text-center font-medium text-text-secondary hover:text-primary transition-colors duration-200">
+                        Register
+                    </button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-text-primary mb-2">Welcome Back</h2>
+                        <p class="text-text-secondary text-sm">Sign in to access your secure healthcare portal</p>
+                    </div>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label for="loginEmail" class="block text-sm font-medium text-text-primary mb-1">Email Address</label>
+                            <div class="relative">
+                                <input type="email" id="loginEmail" name="email" class="form-input pl-10" placeholder="Enter your email" required />
+                                <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="loginPassword" class="block text-sm font-medium text-text-primary mb-1">Password</label>
+                            <div class="relative">
+                                <input type="password" id="loginPassword" name="password" class="form-input pl-10 pr-10" placeholder="Enter your password" required />
+                                <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                                <button type="button" id="toggleLoginPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-primary">
+                                    <i class="fas fa-eye text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="rememberMe" class="h-4 w-4 text-primary focus:ring-primary border-border rounded" />
+                                <label for="rememberMe" class="ml-2 block text-sm text-text-secondary">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm text-primary hover:text-primary-700 transition-colors duration-200">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full py-3 text-base font-medium" onclick="handleLogin(event)">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Sign In Securely
+                        </button>
+                    </form>
+
+                    <!-- Social Login -->
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-border"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-surface text-text-secondary">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 grid grid-cols-2 gap-3">
+                            <button class="w-full inline-flex justify-center py-2 px-4 border border-border rounded-md shadow-sm bg-surface text-sm font-medium text-text-secondary hover:bg-gray-50 transition-colors duration-200">
+                                <i class="fab fa-google text-red-500 mr-2"></i>
+                                Google
+                            </button>
+                            <button class="w-full inline-flex justify-center py-2 px-4 border border-border rounded-md shadow-sm bg-surface text-sm font-medium text-text-secondary hover:bg-gray-50 transition-colors duration-200">
+                                <i class="fab fa-apple text-gray-900 mr-2"></i>
+                                Apple
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div id="registerForm" class="space-y-6 hidden">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-text-primary mb-2">Create Account</h2>
+                        <p class="text-text-secondary text-sm">Join our secure healthcare platform</p>
+                    </div>
+
+                    <form class="space-y-4">
+                        <!-- Role Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Account Type</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="relative">
+                                    <input type="radio" name="role" value="patient" class="sr-only" checked />
+                                    <div class="border-2 border-primary bg-primary-50 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:bg-primary-100">
+                                        <div class="flex items-center justify-center">
+                                            <i class="fas fa-user text-primary mr-2"></i>
+                                            <span class="text-sm font-medium text-primary">Patient</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="relative">
+                                    <input type="radio" name="role" value="provider" class="sr-only" />
+                                    <div class="border-2 border-border bg-surface rounded-lg p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50">
+                                        <div class="flex items-center justify-center">
+                                            <i class="fas fa-user-md text-text-secondary mr-2"></i>
+                                            <span class="text-sm font-medium text-text-secondary">Provider</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-text-primary mb-1">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="John" required />
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-text-primary mb-1">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Doe" required />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="registerEmail" class="block text-sm font-medium text-text-primary mb-1">Email Address</label>
+                            <div class="relative">
+                                <input type="email" id="registerEmail" name="email" class="form-input pl-10" placeholder="john.doe@email.com" required />
+                                <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-text-primary mb-1">Phone Number</label>
+                            <div class="relative">
+                                <input type="tel" id="phone" name="phone" class="form-input pl-10" placeholder="(555) 123-4567" required />
+                                <i class="fas fa-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="dateOfBirth" class="block text-sm font-medium text-text-primary mb-1">Date of Birth</label>
+                            <div class="relative">
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-input pl-10" required />
+                                <i class="fas fa-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="registerPassword" class="block text-sm font-medium text-text-primary mb-1">Password</label>
+                            <div class="relative">
+                                <input type="password" id="registerPassword" name="password" class="form-input pl-10 pr-10" placeholder="Create a strong password" required />
+                                <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm"></i>
+                                <button type="button" id="toggleRegisterPassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-primary">
+                                    <i class="fas fa-eye text-sm"></i>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator -->
+                            <div class="mt-2">
+                                <div class="flex space-x-1">
+                                    <div class="h-1 w-1/4 bg-gray-200 rounded"></div>
+                                    <div class="h-1 w-1/4 bg-gray-200 rounded"></div>
+                                    <div class="h-1 w-1/4 bg-gray-200 rounded"></div>
+                                    <div class="h-1 w-1/4 bg-gray-200 rounded"></div>
+                                </div>
+                                <p class="text-xs text-text-secondary mt-1">Password strength: Weak</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <input type="checkbox" id="terms" class="h-4 w-4 text-primary focus:ring-primary border-border rounded mt-1" required />
+                            <label for="terms" class="ml-2 block text-sm text-text-secondary">
+                                I agree to the <a href="#" class="text-primary hover:text-primary-700">Terms of Service</a> and <a href="#" class="text-primary hover:text-primary-700">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full py-3 text-base font-medium" onclick="handleRegister(event)">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Create Secure Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-4 text-xs text-text-secondary">
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-shield-alt text-secondary"></i>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-user-shield text-primary"></i>
+                        <span>HIPAA Compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-clock text-warning"></i>
+                        <span>24/7 Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-border py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-sm text-text-secondary">
+                    © 2025 HealthCare Portal. All Rights Reserved.
+                </div>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Terms of Service</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('text-primary', 'border-b-2', 'border-primary');
+            loginTab.classList.remove('text-text-secondary');
+            registerTab.classList.add('text-text-secondary');
+            registerTab.classList.remove('text-primary', 'border-b-2', 'border-primary');
+            
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('text-primary', 'border-b-2', 'border-primary');
+            registerTab.classList.remove('text-text-secondary');
+            loginTab.classList.add('text-text-secondary');
+            loginTab.classList.remove('text-primary', 'border-b-2', 'border-primary');
+            
+            registerForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        });
+
+        // Password toggle functionality
+        document.getElementById('toggleLoginPassword').addEventListener('click', function() {
+            const password = document.getElementById('loginPassword');
+            const icon = this.querySelector('i');
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        document.getElementById('toggleRegisterPassword').addEventListener('click', function() {
+            const password = document.getElementById('registerPassword');
+            const icon = this.querySelector('i');
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Role selection functionality
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('input[name="role"]').forEach(r => {
+                    const div = r.parentElement.querySelector('div');
+                    const icon = div.querySelector('i');
+                    const span = div.querySelector('span');
+                    
+                    if (r.checked) {
+                        div.classList.add('border-primary', 'bg-primary-50');
+                        div.classList.remove('border-border', 'bg-surface');
+                        icon.classList.add('text-primary');
+                        icon.classList.remove('text-text-secondary');
+                        span.classList.add('text-primary');
+                        span.classList.remove('text-text-secondary');
+                    } else {
+                        div.classList.add('border-border', 'bg-surface');
+                        div.classList.remove('border-primary', 'bg-primary-50');
+                        icon.classList.add('text-text-secondary');
+                        icon.classList.remove('text-primary');
+                        span.classList.add('text-text-secondary');
+                        span.classList.remove('text-primary');
+                    }
+                });
+            });
+        });
+
+        // Authentication handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            // Show loading state
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
+            button.disabled = true;
+            
+            // Simulate authentication
+            setTimeout(() => {
+                // Mock successful login - redirect to patient dashboard
+                window.location.href = 'patient_dashboard.html';
+            }, 2000);
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const form = event.target.closest('form');
+            const userData = {
+                firstName: form.firstName.value,
+                lastName: form.lastName.value,
+                email: form.registerEmail.value,
+                password: form.registerPassword.value,
+                phone: form.phone.value,
+                dateOfBirth: form.dateOfBirth.value,
+                role: form.role.value
+            };
+
+            // Show loading state
+            const button = event.target;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
+            button.disabled = true;
+
+            // Send data to backend
+            fetch('http://localhost:5000/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'patient_dashboard.html';
+                } else {
+                    alert('Registration failed: ' + data.error);
+                    button.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Create Secure Account';
+                    button.disabled = false;
+                }
+            })
+            .catch(() => {
+                alert('Network error');
+                button.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Create Secure Account';
+                button.disabled = false;
+            });
+        }
+
+        // Password strength indicator
+        document.getElementById('registerPassword').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBars = document.querySelectorAll('.h-1');
+            const strengthText = document.querySelector('.text-xs.text-text-secondary');
+            
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            strengthBars.forEach((bar, index) => {
+                if (index < strength) {
+                    if (strength === 1) {
+                        bar.classList.add('bg-red-500');
+                        bar.classList.remove('bg-gray-200', 'bg-yellow-500', 'bg-green-500');
+                    } else if (strength === 2) {
+                        bar.classList.add('bg-yellow-500');
+                        bar.classList.remove('bg-gray-200', 'bg-red-500', 'bg-green-500');
+                    } else if (strength >= 3) {
+                        bar.classList.add('bg-green-500');
+                        bar.classList.remove('bg-gray-200', 'bg-red-500', 'bg-yellow-500');
+                    }
+                } else {
+                    bar.classList.add('bg-gray-200');
+                    bar.classList.remove('bg-red-500', 'bg-yellow-500', 'bg-green-500');
+                }
+            });
+            
+            const strengthLabels = ['Weak', 'Fair', 'Good', 'Strong'];
+            strengthText.textContent = `Password strength: ${strengthLabels[Math.max(0, strength - 1)] || 'Weak'}`;
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

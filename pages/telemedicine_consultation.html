@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telemedicine Consultation - HealthCare Portal</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhealthcare3944back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface border-b border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HealthCare Portal</h1>
+                        <p class="text-xs text-text-secondary">Secure Medical Platform</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="patient_dashboard.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Dashboard</a>
+                    <a href="appointment_scheduling.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Appointments</a>
+                    <a href="telemedicine_consultation.html" class="text-primary font-medium">Consultation</a>
+                    <a href="health_records_management.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Records</a>
+                    <a href="prescription_management.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Prescriptions</a>
+                </nav>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-alt text-secondary text-sm"></i>
+                        <span class="text-xs text-text-secondary hidden sm:inline">HIPAA Compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="User" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary hidden sm:inline">John Doe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Waiting Room Interface (Initially visible) -->
+    <div id="waitingRoom" class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl w-full space-y-8">
+            <div class="text-center">
+                <div class="mx-auto h-24 w-24 bg-primary-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-video text-primary text-3xl"></i>
+                </div>
+                <h2 class="text-3xl font-semibold text-text-primary mb-4">Preparing Your Consultation</h2>
+                <p class="text-text-secondary text-lg mb-8">Dr. Sarah Smith will join you shortly. Please complete the system check below.</p>
+            </div>
+
+            <!-- System Check -->
+            <div class="card space-y-6">
+                <h3 class="text-xl font-semibold text-text-primary mb-4">Pre-Consultation System Check</h3>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-success/10 border border-success/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-microphone text-success"></i>
+                            <span class="font-medium text-success">Microphone Access</span>
+                        </div>
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-success/10 border border-success/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-video text-success"></i>
+                            <span class="font-medium text-success">Camera Access</span>
+                        </div>
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-success/10 border border-success/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-wifi text-success"></i>
+                            <span class="font-medium text-success">Internet Connection</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-success">Excellent</span>
+                            <i class="fas fa-check-circle text-success"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Preparation -->
+                <div class="border-t border-border pt-6">
+                    <h4 class="font-semibold text-text-primary mb-3">Before Your Consultation</h4>
+                    <ul class="space-y-2 text-text-secondary">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-secondary text-sm"></i>
+                            <span>Ensure you're in a quiet, private location</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-secondary text-sm"></i>
+                            <span>Have your insurance card and ID ready</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-secondary text-sm"></i>
+                            <span>Prepare a list of current medications</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-check text-secondary text-sm"></i>
+                            <span>Note any symptoms or concerns to discuss</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button onclick="startConsultation()" class="btn-primary px-8 py-3 text-lg">
+                        <i class="fas fa-video mr-2"></i>
+                        Join Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Consultation Interface (Initially hidden) -->
+    <div id="consultationInterface" class="hidden flex-1 flex flex-col h-screen">
+        <!-- Consultation Header -->
+        <div class="bg-surface border-b border-border px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="h-3 w-3 bg-success rounded-full animate-pulse"></div>
+                        <span class="text-sm font-medium text-text-primary">Live Consultation</span>
+                    </div>
+                    <div class="text-sm text-text-secondary">
+                        Dr. Sarah Smith - Cardiology
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Connection Quality -->
+                    <div class="flex items-center space-x-2">
+                        <div class="flex space-x-1">
+                            <div class="h-2 w-1 bg-success rounded-full"></div>
+                            <div class="h-3 w-1 bg-success rounded-full"></div>
+                            <div class="h-4 w-1 bg-success rounded-full"></div>
+                            <div class="h-3 w-1 bg-success rounded-full"></div>
+                        </div>
+                        <span class="text-xs text-success">Excellent</span>
+                    </div>
+                    
+                    <!-- Session Timer -->
+                    <div class="text-sm font-data text-text-secondary">
+                        <i class="fas fa-clock mr-1"></i>
+                        <span id="sessionTimer">00:00</span>
+                    </div>
+                    
+                    <!-- Emergency Button -->
+                    <button class="bg-accent text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-accent-700 transition-colors duration-200">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        Emergency
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Video Area -->
+            <div class="flex-1 relative bg-gray-900">
+                <!-- Provider Video (Main) -->
+                <div class="w-full h-full relative">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Sarah Smith" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    
+                    <!-- Provider Info Overlay -->
+                    <div class="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-2 rounded-md">
+                        <div class="text-sm font-medium">Dr. Sarah Smith</div>
+                        <div class="text-xs opacity-80">Cardiology Specialist</div>
+                    </div>
+                </div>
+
+                <!-- Patient Video (Picture-in-Picture) -->
+                <div class="absolute top-4 right-4 w-48 h-36 bg-gray-800 rounded-lg overflow-hidden border-2 border-white shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Patient" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <div class="absolute bottom-1 left-1 bg-black/50 text-white px-2 py-1 rounded text-xs">
+                        You
+                    </div>
+                </div>
+
+                <!-- Screen Share Indicator (Hidden by default) -->
+                <div id="screenShareIndicator" class="hidden absolute top-4 left-4 bg-primary text-white px-3 py-2 rounded-md">
+                    <i class="fas fa-desktop mr-2"></i>
+                    Screen Sharing Active
+                </div>
+            </div>
+
+            <!-- Side Panel (Desktop) -->
+            <div id="sidePanel" class="hidden lg:block w-96 bg-surface border-l border-border flex flex-col">
+                <!-- Panel Tabs -->
+                <div class="flex border-b border-border">
+                    <button id="notesTab" class="flex-1 py-3 px-4 text-center font-medium text-primary border-b-2 border-primary">
+                        <i class="fas fa-notes-medical mr-2"></i>
+                        Notes
+                    </button>
+                    <button id="vitalsTab" class="flex-1 py-3 px-4 text-center font-medium text-text-secondary hover:text-primary transition-colors duration-200">
+                        <i class="fas fa-heartbeat mr-2"></i>
+                        Vitals
+                    </button>
+                    <button id="chatTab" class="flex-1 py-3 px-4 text-center font-medium text-text-secondary hover:text-primary transition-colors duration-200">
+                        <i class="fas fa-comments mr-2"></i>
+                        Chat
+                    </button>
+                </div>
+
+                <!-- Notes Panel -->
+                <div id="notesPanel" class="flex-1 p-4 overflow-y-auto">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Chief Complaint</label>
+                            <textarea class="form-input h-20 resize-none" placeholder="Patient's primary concern..."></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">History of Present Illness</label>
+                            <textarea class="form-input h-24 resize-none" placeholder="Detailed history..."></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Assessment</label>
+                            <textarea class="form-input h-20 resize-none" placeholder="Clinical assessment..."></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Plan</label>
+                            <textarea class="form-input h-24 resize-none" placeholder="Treatment plan..."></textarea>
+                        </div>
+                        
+                        <button class="btn-primary w-full">
+                            <i class="fas fa-save mr-2"></i>
+                            Save Notes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vitals Panel -->
+                <div id="vitalsPanel" class="hidden flex-1 p-4 overflow-y-auto">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Blood Pressure</label>
+                                <input type="text" class="form-input" placeholder="120/80" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Heart Rate</label>
+                                <input type="text" class="form-input" placeholder="72 bpm" />
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Temperature</label>
+                                <input type="text" class="form-input" placeholder="98.6°F" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Oxygen Sat</label>
+                                <input type="text" class="form-input" placeholder="98%" />
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Weight</label>
+                                <input type="text" class="form-input" placeholder="150 lbs" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-text-primary mb-1">Height</label>
+                                <input type="text" class="form-input" placeholder="5'6\" " />
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-text-primary mb-2">Additional Notes</label>
+                            <textarea class="form-input h-20 resize-none" placeholder="Additional vital signs or observations..."></textarea>
+                        </div>
+                        
+                        <button class="btn-secondary w-full">
+                            <i class="fas fa-heartbeat mr-2"></i>
+                            Record Vitals
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Panel -->
+                <div id="chatPanel" class="hidden flex-1 flex flex-col">
+                    <div class="flex-1 p-4 overflow-y-auto space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Smith" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div class="flex-1">
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="text-sm text-text-primary">Hello John! How are you feeling today?</p>
+                                </div>
+                                <p class="text-xs text-text-secondary mt-1">Dr. Smith • 2 min ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 flex-row-reverse">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Patient" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <div class="flex-1">
+                                <div class="bg-primary text-white rounded-lg p-3">
+                                    <p class="text-sm">I've been experiencing some chest discomfort, especially when exercising.</p>
+                                </div>
+                                <p class="text-xs text-text-secondary mt-1 text-right">You • 1 min ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-border p-4">
+                        <div class="flex space-x-2">
+                            <input type="text" class="form-input flex-1" placeholder="Type your message..." />
+                            <button class="btn-primary px-4">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Bar -->
+        <div class="bg-surface border-t border-border px-4 py-4">
+            <div class="flex items-center justify-center space-x-6">
+                <!-- Audio Control -->
+                <button id="audioBtn" class="flex flex-col items-center space-y-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-microphone text-text-primary text-xl"></i>
+                    <span class="text-xs text-text-secondary">Mute</span>
+                </button>
+                
+                <!-- Video Control -->
+                <button id="videoBtn" class="flex flex-col items-center space-y-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-video text-text-primary text-xl"></i>
+                    <span class="text-xs text-text-secondary">Camera</span>
+                </button>
+                
+                <!-- Screen Share -->
+                <button id="screenShareBtn" class="flex flex-col items-center space-y-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-desktop text-text-primary text-xl"></i>
+                    <span class="text-xs text-text-secondary">Share</span>
+                </button>
+                
+                <!-- Chat Toggle (Mobile) -->
+                <button id="chatToggle" class="lg:hidden flex flex-col items-center space-y-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-comments text-text-primary text-xl"></i>
+                    <span class="text-xs text-text-secondary">Chat</span>
+                </button>
+                
+                <!-- End Call -->
+                <button onclick="endConsultation()" class="flex flex-col items-center space-y-1 p-3 rounded-lg bg-accent hover:bg-accent-700 transition-colors duration-200">
+                    <i class="fas fa-phone-slash text-white text-xl"></i>
+                    <span class="text-xs text-white">End Call</span>
+                </button>
+                
+                <!-- Recording Control (Provider only) -->
+                <button id="recordBtn" class="flex flex-col items-center space-y-1 p-3 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-record-vinyl text-text-primary text-xl"></i>
+                    <span class="text-xs text-text-secondary">Record</span>
+                </button>
+            </div>
+            
+            <!-- Patient Consent Indicator -->
+            <div class="flex items-center justify-center mt-3">
+                <div class="flex items-center space-x-2 text-xs text-text-secondary">
+                    <i class="fas fa-shield-alt text-secondary"></i>
+                    <span>End-to-end encrypted • Patient consent: Recording allowed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Chat Overlay -->
+    <div id="mobileChatOverlay" class="lg:hidden fixed inset-0 bg-surface z-50 hidden">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <h3 class="text-lg font-semibold text-text-primary">Consultation Chat</h3>
+                <button id="closeMobileChat" class="text-text-secondary hover:text-primary">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 p-4 overflow-y-auto space-y-3">
+                <div class="flex items-start space-x-3">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dr. Smith" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <div class="flex-1">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <p class="text-sm text-text-primary">Hello John! How are you feeling today?</p>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1">Dr. Smith • 2 min ago</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3 flex-row-reverse">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Patient" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    <div class="flex-1">
+                        <div class="bg-primary text-white rounded-lg p-3">
+                            <p class="text-sm">I've been experiencing some chest discomfort, especially when exercising.</p>
+                        </div>
+                        <p class="text-xs text-text-secondary mt-1 text-right">You • 1 min ago</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-border p-4">
+                <div class="flex space-x-2">
+                    <input type="text" class="form-input flex-1" placeholder="Type your message..." />
+                    <button class="btn-primary px-4">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionStartTime = Date.now();
+        let sessionTimer;
+        let isAudioMuted = false;
+        let isVideoOff = false;
+        let isScreenSharing = false;
+        let isRecording = false;
+
+        // Start consultation
+        function startConsultation() {
+            document.getElementById('waitingRoom').classList.add('hidden');
+            document.getElementById('consultationInterface').classList.remove('hidden');
+            startSessionTimer();
+        }
+
+        // End consultation
+        function endConsultation() {
+            if (confirm('Are you sure you want to end the consultation?')) {
+                clearInterval(sessionTimer);
+                // Generate post-consultation summary
+                generateConsultationSummary();
+                // Redirect to patient dashboard
+                setTimeout(() => {
+                    window.location.href = 'patient_dashboard.html';
+                }, 3000);
+            }
+        }
+
+        // Session timer
+        function startSessionTimer() {
+            sessionTimer = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - sessionStartTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('sessionTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Audio control
+        document.getElementById('audioBtn').addEventListener('click', function() {
+            isAudioMuted = !isAudioMuted;
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            
+            if (isAudioMuted) {
+                icon.classList.remove('fa-microphone');
+                icon.classList.add('fa-microphone-slash');
+                text.textContent = 'Unmute';
+                this.classList.add('bg-accent', 'text-white');
+                this.classList.remove('bg-gray-100');
+            } else {
+                icon.classList.remove('fa-microphone-slash');
+                icon.classList.add('fa-microphone');
+                text.textContent = 'Mute';
+                this.classList.remove('bg-accent', 'text-white');
+                this.classList.add('bg-gray-100');
+            }
+        });
+
+        // Video control
+        document.getElementById('videoBtn').addEventListener('click', function() {
+            isVideoOff = !isVideoOff;
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            
+            if (isVideoOff) {
+                icon.classList.remove('fa-video');
+                icon.classList.add('fa-video-slash');
+                text.textContent = 'Turn On';
+                this.classList.add('bg-accent', 'text-white');
+                this.classList.remove('bg-gray-100');
+            } else {
+                icon.classList.remove('fa-video-slash');
+                icon.classList.add('fa-video');
+                text.textContent = 'Camera';
+                this.classList.remove('bg-accent', 'text-white');
+                this.classList.add('bg-gray-100');
+            }
+        });
+
+        // Screen share control
+        document.getElementById('screenShareBtn').addEventListener('click', function() {
+            isScreenSharing = !isScreenSharing;
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            const indicator = document.getElementById('screenShareIndicator');
+            
+            if (isScreenSharing) {
+                text.textContent = 'Stop Share';
+                this.classList.add('bg-primary', 'text-white');
+                this.classList.remove('bg-gray-100');
+                indicator.classList.remove('hidden');
+            } else {
+                text.textContent = 'Share';
+                this.classList.remove('bg-primary', 'text-white');
+                this.classList.add('bg-gray-100');
+                indicator.classList.add('hidden');
+            }
+        });
+
+        // Recording control
+        document.getElementById('recordBtn').addEventListener('click', function() {
+            isRecording = !isRecording;
+            const icon = this.querySelector('i');
+            const text = this.querySelector('span');
+            
+            if (isRecording) {
+                icon.classList.remove('fa-record-vinyl');
+                icon.classList.add('fa-stop');
+                text.textContent = 'Stop Rec';
+                this.classList.add('bg-accent', 'text-white');
+                this.classList.remove('bg-gray-100');
+            } else {
+                icon.classList.remove('fa-stop');
+                icon.classList.add('fa-record-vinyl');
+                text.textContent = 'Record';
+                this.classList.remove('bg-accent', 'text-white');
+                this.classList.add('bg-gray-100');
+            }
+        });
+
+        // Side panel tabs
+        document.getElementById('notesTab').addEventListener('click', function() {
+            switchTab('notes');
+        });
+
+        document.getElementById('vitalsTab').addEventListener('click', function() {
+            switchTab('vitals');
+        });
+
+        document.getElementById('chatTab').addEventListener('click', function() {
+            switchTab('chat');
+        });
+
+        function switchTab(tab) {
+            // Reset all tabs
+            document.querySelectorAll('[id$="Tab"]').forEach(tabBtn => {
+                tabBtn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                tabBtn.classList.add('text-text-secondary');
+            });
+            
+            // Hide all panels
+            document.querySelectorAll('[id$="Panel"]').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            
+            // Activate selected tab
+            document.getElementById(tab + 'Tab').classList.add('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById(tab + 'Tab').classList.remove('text-text-secondary');
+            document.getElementById(tab + 'Panel').classList.remove('hidden');
+        }
+
+        // Mobile chat toggle
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            document.getElementById('mobileChatOverlay').classList.remove('hidden');
+        });
+
+        document.getElementById('closeMobileChat').addEventListener('click', function() {
+            document.getElementById('mobileChatOverlay').classList.add('hidden');
+        });
+
+        // Generate consultation summary
+        function generateConsultationSummary() {
+            const summary = {
+                date: new Date().toLocaleDateString(),
+                duration: document.getElementById('sessionTimer').textContent,
+                provider: 'Dr. Sarah Smith',
+                patient: 'John Doe',
+                notes: 'Chest discomfort during exercise discussed. Recommended cardiac evaluation.',
+                followUp: 'Schedule stress test within 2 weeks',
+                prescriptions: 'None prescribed during this consultation'
+            };
+            
+            // In a real application, this would be sent to the server
+            console.log('Consultation Summary:', summary);
+            
+            // Show summary notification
+            alert('Consultation ended. Summary has been saved to your medical records.');
+        }
+
+        // Simulate WebRTC connection quality monitoring
+        setInterval(() => {
+            // Randomly simulate connection quality changes
+            const qualities = ['Poor', 'Fair', 'Good', 'Excellent'];
+            const colors = ['text-accent', 'text-warning', 'text-secondary', 'text-success'];
+            const randomQuality = Math.floor(Math.random() * qualities.length);
+            
+            // Update connection quality indicator (simplified simulation)
+            // In real implementation, this would be based on actual WebRTC stats
+        }, 30000);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

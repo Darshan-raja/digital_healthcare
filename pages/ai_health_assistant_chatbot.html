@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Health Assistant - HealthCare Portal</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhealthcare3944back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Back Button & Title -->
+                <div class="flex items-center space-x-4">
+                    <a href="patient_dashboard.html" class="text-text-secondary hover:text-primary transition-colors duration-200">
+                        <i class="fas fa-arrow-left text-lg"></i>
+                    </a>
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-primary p-2 rounded-full">
+                            <i class="fas fa-robot text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-semibold text-text-primary">AI Health Assistant</h1>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                                <span class="text-xs text-secondary font-medium">Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="flex items-center space-x-3">
+                    <!-- Emergency Button -->
+                    <button id="emergencyBtn" class="bg-accent text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-accent-700 transition-colors duration-200 emergency-pulse">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        Emergency
+                    </button>
+                    
+                    <!-- Menu -->
+                    <button id="chatMenuBtn" class="text-text-secondary hover:text-primary transition-colors duration-200">
+                        <i class="fas fa-ellipsis-v text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <!-- Quick Actions Bar -->
+        <div class="bg-surface border-b border-border p-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex space-x-2 overflow-x-auto pb-2">
+                    <button class="quick-action-btn bg-primary-50 text-primary px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" onclick="addQuickMessage('Check my symptoms')">
+                        <i class="fas fa-stethoscope mr-2"></i>Symptom Checker
+                    </button>
+                    <button class="quick-action-btn bg-secondary-50 text-secondary px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" onclick="addQuickMessage('Help with medications')">
+                        <i class="fas fa-pills mr-2"></i>Medications
+                    </button>
+                    <button class="quick-action-btn bg-warning/10 text-warning px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" onclick="addQuickMessage('Schedule an appointment')">
+                        <i class="fas fa-calendar-plus mr-2"></i>Appointments
+                    </button>
+                    <button class="quick-action-btn bg-accent-50 text-accent px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap" onclick="addQuickMessage('View my health records')">
+                        <i class="fas fa-file-medical mr-2"></i>Health Records
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="chat-messages flex-1 p-4" id="chatMessages">
+            <div class="max-w-4xl mx-auto space-y-4">
+                <!-- Welcome Message -->
+                <div class="message-bubble ai-message">
+                    <div class="p-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-primary p-2 rounded-full flex-shrink-0">
+                                <i class="fas fa-robot text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium text-primary">AI Health Assistant</span>
+                                    <span class="text-xs text-text-secondary">Just now</span>
+                                </div>
+                                <p class="text-sm text-text-primary leading-relaxed">
+                                    Hello Sarah! I'm your AI Health Assistant, here to help you 24/7 with your healthcare needs. I can help you with:
+                                </p>
+                                <ul class="text-sm text-text-primary mt-2 space-y-1">
+                                    <li>• Symptom checking and health guidance</li>
+                                    <li>• Medication information and reminders</li>
+                                    <li>• Appointment scheduling assistance</li>
+                                    <li>• General health questions and support</li>
+                                </ul>
+                                <div class="bg-warning/10 border border-warning/20 rounded-lg p-3 mt-3">
+                                    <p class="text-xs text-warning">
+                                        <i class="fas fa-info-circle mr-1"></i>
+                                        <strong>Medical Disclaimer:</strong> This AI assistant provides general health information and should not replace professional medical advice. For emergencies, call 911 or use the emergency button above.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="bg-surface border-t border-border p-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-end space-x-3">
+                    <!-- Attachment Button -->
+                    <button class="text-text-secondary hover:text-primary transition-colors duration-200 p-2">
+                        <i class="fas fa-paperclip text-lg"></i>
+                    </button>
+                    
+                    <!-- Voice Input Button -->
+                    <button id="voiceBtn" class="text-text-secondary hover:text-primary transition-colors duration-200 p-2">
+                        <i class="fas fa-microphone text-lg"></i>
+                    </button>
+                    
+                    <!-- Input Field -->
+                    <div class="flex-1 relative">
+                        <textarea id="messageInput" placeholder="Type your message or describe your symptoms..." class="w-full p-3 border border-border rounded-lg resize-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200" rows="1" maxlength="500"></textarea>
+                        <div class="absolute bottom-2 right-2 text-xs text-text-secondary" id="charCount">0/500</div>
+                    </div>
+                    
+                    <!-- Send Button -->
+                    <button id="sendBtn" class="bg-primary text-white p-3 rounded-lg hover:bg-primary-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="fixed inset-0 bg-black/50 backdrop-filter backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-surface rounded-lg shadow-lg max-w-md w-full p-6">
+                <div class="text-center">
+                    <div class="bg-accent-50 p-4 rounded-full w-16 h-16 mx-auto mb-4">
+                        <i class="fas fa-exclamation-triangle text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Emergency Support</h3>
+                    <p class="text-text-secondary mb-6">If this is a medical emergency, please call 911 immediately or contact emergency services.</p>
+                    
+                    <div class="space-y-3">
+                        <button class="w-full bg-accent text-white py-3 rounded-lg font-medium hover:bg-accent-700 transition-colors duration-200">
+                            <i class="fas fa-phone mr-2"></i>Call 911
+                        </button>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200">
+                            <i class="fas fa-user-md mr-2"></i>Contact My Doctor
+                        </button>
+                        <button class="w-full bg-secondary text-white py-3 rounded-lg font-medium hover:bg-secondary-700 transition-colors duration-200">
+                            <i class="fas fa-comments mr-2"></i>Chat with Nurse Hotline
+                        </button>
+                        <button id="closeEmergencyModal" class="w-full text-text-secondary py-2 hover:text-primary transition-colors duration-200">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Menu Modal -->
+    <div id="chatMenuModal" class="fixed inset-0 bg-black/50 backdrop-filter backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-surface rounded-lg shadow-lg max-w-sm w-full p-6">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Chat Options</h3>
+                <div class="space-y-2">
+                    <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-history mr-3 text-text-secondary"></i>Chat History
+                    </button>
+                    <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-download mr-3 text-text-secondary"></i>Export Conversation
+                    </button>
+                    <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-user-md mr-3 text-text-secondary"></i>Escalate to Human
+                    </button>
+                    <button class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        <i class="fas fa-cog mr-3 text-text-secondary"></i>Settings
+                    </button>
+                    <button id="closeChatMenu" class="w-full text-left p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-accent">
+                        <i class="fas fa-times mr-3"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat functionality
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const charCount = document.getElementById('charCount');
+        const voiceBtn = document.getElementById('voiceBtn');
+        
+        // Emergency modal
+        const emergencyBtn = document.getElementById('emergencyBtn');
+        const emergencyModal = document.getElementById('emergencyModal');
+        const closeEmergencyModal = document.getElementById('closeEmergencyModal');
+        
+        // Chat menu modal
+        const chatMenuBtn = document.getElementById('chatMenuBtn');
+        const chatMenuModal = document.getElementById('chatMenuModal');
+        const closeChatMenu = document.getElementById('closeChatMenu');
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+            
+            // Update character count
+            const count = this.value.length;
+            charCount.textContent = `${count}/500`;
+            
+            // Enable/disable send button
+            sendBtn.disabled = count === 0;
+        });
+
+        // Send message on Enter (but not Shift+Enter)
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Send button click
+        sendBtn.addEventListener('click', sendMessage);
+
+        // Voice input
+        voiceBtn.addEventListener('click', function() {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+                
+                voiceBtn.innerHTML = '<i class="fas fa-microphone-slash text-accent"></i>';
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    messageInput.value = transcript;
+                    messageInput.dispatchEvent(new Event('input'));
+                };
+                
+                recognition.onend = function() {
+                    voiceBtn.innerHTML = '<i class="fas fa-microphone text-lg"></i>';
+                };
+                
+                recognition.start();
+            } else {
+                alert('Speech recognition not supported in this browser.');
+            }
+        });
+
+        // Emergency modal
+        emergencyBtn.addEventListener('click', function() {
+            emergencyModal.classList.remove('hidden');
+        });
+
+        closeEmergencyModal.addEventListener('click', function() {
+            emergencyModal.classList.add('hidden');
+        });
+
+        // Chat menu modal
+        chatMenuBtn.addEventListener('click', function() {
+            chatMenuModal.classList.remove('hidden');
+        });
+
+        closeChatMenu.addEventListener('click', function() {
+            chatMenuModal.classList.add('hidden');
+        });
+
+        // Close modals on outside click
+        [emergencyModal, chatMenuModal].forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+
+            // Save user message to backend
+            fetch('http://localhost:5000/api/chats', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user: 'Sarah', message }) // Replace 'Sarah' with dynamic username if available
+            });
+
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            charCount.textContent = '0/500';
+            sendBtn.disabled = true;
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate AI response
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = generateAIResponse(message);
+                addMessage(response.text, 'ai', response.hasActions);
+            }, 1500 + Math.random() * 2000);
+        }
+
+        function addQuickMessage(message) {
+            messageInput.value = message;
+            messageInput.dispatchEvent(new Event('input'));
+            messageInput.focus();
+        }
+
+        function addMessage(text, sender, hasActions = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-bubble ${sender}-message`;
+            
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="p-4">
+                        <div class="flex items-start space-x-3 flex-row-reverse">
+                            <div class="bg-white p-2 rounded-full flex-shrink-0">
+                                <i class="fas fa-user text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1 text-right">
+                                <div class="flex items-center justify-between mb-2 flex-row-reverse">
+                                    <span class="font-medium text-white">You</span>
+                                    <span class="text-xs text-blue-100">${timestamp}</span>
+                                </div>
+                                <p class="text-sm leading-relaxed">${text}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                let actionsHtml = '';
+                if (hasActions) {
+                    actionsHtml = `
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <button class="bg-primary text-white px-3 py-1 rounded-full text-xs hover:bg-primary-700 transition-colors duration-200">
+                                Schedule Follow-up
+                            </button>
+                            <button class="bg-secondary text-white px-3 py-1 rounded-full text-xs hover:bg-secondary-700 transition-colors duration-200">
+                                Set Reminder
+                            </button>
+                            <button class="bg-warning text-white px-3 py-1 rounded-full text-xs hover:bg-warning/80 transition-colors duration-200">
+                                More Info
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                messageDiv.innerHTML = `
+                    <div class="p-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-primary p-2 rounded-full flex-shrink-0">
+                                <i class="fas fa-robot text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-medium text-primary">AI Health Assistant</span>
+                                    <span class="text-xs text-text-secondary">${timestamp}</span>
+                                </div>
+                                <p class="text-sm text-text-primary leading-relaxed">${text}</p>
+                                ${actionsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const messagesContainer = chatMessages.querySelector('.max-w-4xl');
+            messagesContainer.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'message-bubble ai-message';
+            typingDiv.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="bg-primary p-2 rounded-full flex-shrink-0">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="ml-3">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+
+            const messagesContainer = chatMessages.querySelector('.max-w-4xl');
+            messagesContainer.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Emergency detection
+            const emergencyKeywords = ['emergency', 'urgent', 'chest pain', 'heart attack', 'stroke', 'bleeding', 'unconscious', 'breathing difficulty'];
+            if (emergencyKeywords.some(keyword => message.includes(keyword))) {
+                return {
+                    text: "🚨 I've detected this may be a medical emergency. Please call 911 immediately or contact your local emergency services. If you're experiencing chest pain, difficulty breathing, or any life-threatening symptoms, do not delay seeking immediate medical attention.",
+                    hasActions: true
+                };
+            }
+            
+            // Symptom checking
+            if (message.includes('symptom') || message.includes('pain') || message.includes('fever') || message.includes('headache')) {
+                return {
+                    text: "I can help you understand your symptoms. Based on what you've described, I recommend monitoring your symptoms and considering the following steps: 1) Rest and stay hydrated, 2) Take your temperature if you have a fever, 3) Consider over-the-counter pain relief if appropriate. If symptoms worsen or persist for more than 48 hours, please contact your healthcare provider. Would you like me to help you schedule an appointment?",
+                    hasActions: true
+                };
+            }
+            
+            // Medication queries
+            if (message.includes('medication') || message.includes('medicine') || message.includes('pill') || message.includes('drug')) {
+                return {
+                    text: "I can help you with medication information. Please remember to always take medications as prescribed by your healthcare provider. I can provide general information about drug interactions, side effects, and dosage schedules. For specific medical advice about your prescriptions, please consult your doctor or pharmacist. Would you like me to set up a medication reminder for you?",
+                    hasActions: true
+                };
+            }
+            
+            // Appointment scheduling
+            if (message.includes('appointment') || message.includes('schedule') || message.includes('book') || message.includes('visit')) {
+                return {
+                    text: "I'd be happy to help you schedule an appointment! I can check availability with your healthcare providers and help you book appointments for routine visits, follow-ups, or specialist consultations. Your next available slots with Dr. Michael Chen are: December 20th at 2:30 PM, December 22nd at 10:00 AM, or December 23rd at 3:15 PM. Would you like me to book one of these times?",
+                    hasActions: true
+                };
+            }
+            
+            // Health records
+            if (message.includes('health record') || message.includes('medical record') || message.includes('lab result') || message.includes('test result')) {
+                return {
+                    text: "I can help you access your health records securely. Your latest lab results from December 12th show normal ranges for blood glucose, cholesterol, and blood pressure. Your vaccination records are up to date, and your last physical exam was completed on November 15th. All records are encrypted and HIPAA-compliant. Would you like me to generate a summary report for you?",
+                    hasActions: true
+                };
+            }
+            
+            // Default helpful response
+            const responses = [
+                "I'm here to help with your healthcare needs. You can ask me about symptoms, medications, appointments, or general health questions. How can I assist you today?",
+                "Thank you for your question. I'm designed to provide general health information and support. For specific medical advice, please consult with your healthcare provider. Is there something specific I can help you with?",
+                "I understand you're looking for health information. I can assist with symptom checking, medication reminders, appointment scheduling, and general wellness guidance. What would you like to know more about?"
+            ];
+            
+            return {
+                text: responses[Math.floor(Math.random() * responses.length)],
+                hasActions: false
+            };
+        }
+
+        // Initialize chat with welcome message
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focus on input
+            messageInput.focus();
+            
+            // Add some example quick responses after a delay
+            setTimeout(() => {
+                const exampleDiv = document.createElement('div');
+                exampleDiv.className = 'text-center py-4';
+                exampleDiv.innerHTML = `
+                    <p class="text-sm text-text-secondary mb-3">Try asking me about:</p>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="bg-gray-100 text-text-secondary px-3 py-1 rounded-full text-xs hover:bg-primary hover:text-white transition-colors duration-200" onclick="addQuickMessage('I have a headache and fever')">
+                            "I have a headache and fever"
+                        </button>
+                        <button class="bg-gray-100 text-text-secondary px-3 py-1 rounded-full text-xs hover:bg-primary hover:text-white transition-colors duration-200" onclick="addQuickMessage('When should I take my medications?')">
+                            "When should I take my medications?"
+                        </button>
+                        <button class="bg-gray-100 text-text-secondary px-3 py-1 rounded-full text-xs hover:bg-primary hover:text-white transition-colors duration-200" onclick="addQuickMessage('Book appointment with Dr. Chen')">
+                            "Book appointment with Dr. Chen"
+                        </button>
+                    </div>
+                `;
+                
+                const messagesContainer = chatMessages.querySelector('.max-w-4xl');
+                messagesContainer.appendChild(exampleDiv);
+            }, 2000);
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

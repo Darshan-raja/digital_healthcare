@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Dashboard - HealthCare Portal</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhealthcare3944back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header with Trust Signals -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HealthCare Portal</h1>
+                        <p class="text-xs text-text-secondary">Secure Medical Platform</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="patient_dashboard.html" class="text-primary font-medium border-b-2 border-primary pb-1">Dashboard</a>
+                    <a href="appointment_scheduling.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Appointments</a>
+                    <a href="health_records_management.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Health Records</a>
+                    <a href="prescription_management.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Prescriptions</a>
+                    <a href="telemedicine_consultation.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Consultations</a>
+                </nav>
+
+                <!-- User Profile & Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Emergency Button -->
+                    <button class="bg-accent text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-accent-700 transition-colors duration-200">
+                        <i class="fas fa-exclamation-triangle mr-1"></i>
+                        Emergency
+                    </button>
+                    
+                    <!-- Notifications -->
+                    <div class="relative">
+                        <button class="text-text-secondary hover:text-primary transition-colors duration-200">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+
+                    <!-- User Menu -->
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors duration-200">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sarah Johnson" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                            <span class="hidden md:block text-sm font-medium">Sarah Johnson</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h2 class="text-2xl font-semibold text-text-primary">Welcome back, Sarah!</h2>
+                    <p class="text-text-secondary mt-1">Here's your health overview for today</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center space-x-2 text-sm text-text-secondary">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Today, December 15, 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Next Appointment -->
+            <div class="card hover-lift">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Next Appointment</p>
+                        <p class="text-lg font-semibold text-text-primary mt-1">Dec 18, 2:30 PM</p>
+                        <p class="text-sm text-primary">Dr. Michael Chen</p>
+                    </div>
+                    <div class="bg-primary-50 p-3 rounded-lg">
+                        <i class="fas fa-calendar-check text-primary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vital Signs -->
+            <div class="card hover-lift">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Blood Pressure</p>
+                        <p class="text-lg font-semibold text-text-primary mt-1">120/80</p>
+                        <p class="text-sm text-secondary">Normal Range</p>
+                    </div>
+                    <div class="bg-secondary-50 p-3 rounded-lg">
+                        <i class="fas fa-heartbeat text-secondary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medications -->
+            <div class="card hover-lift">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Medications Due</p>
+                        <p class="text-lg font-semibold text-text-primary mt-1">2 Today</p>
+                        <p class="text-sm text-warning">1 Overdue</p>
+                    </div>
+                    <div class="bg-warning/10 p-3 rounded-lg">
+                        <i class="fas fa-pills text-warning text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Score -->
+            <div class="card hover-lift">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-text-secondary text-sm font-medium">Health Score</p>
+                        <p class="text-lg font-semibold text-text-primary mt-1">85/100</p>
+                        <p class="text-sm text-secondary">Excellent</p>
+                    </div>
+                    <div class="bg-secondary-50 p-3 rounded-lg">
+                        <i class="fas fa-chart-line text-secondary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Quick Actions & Recent Activity -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Quick Actions -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="appointment_scheduling.html" class="flex flex-col items-center p-4 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200">
+                            <i class="fas fa-calendar-plus text-primary text-2xl mb-2"></i>
+                            <span class="text-sm font-medium text-primary text-center">Schedule Appointment</span>
+                        </a>
+                        <a href="prescription_management.html" class="flex flex-col items-center p-4 bg-secondary-50 rounded-lg hover:bg-secondary-100 transition-colors duration-200">
+                            <i class="fas fa-prescription-bottle text-secondary text-2xl mb-2"></i>
+                            <span class="text-sm font-medium text-secondary text-center">Request Refill</span>
+                        </a>
+                        <a href="telemedicine_consultation.html" class="flex flex-col items-center p-4 bg-warning/10 rounded-lg hover:bg-warning/20 transition-colors duration-200">
+                            <i class="fas fa-video text-warning text-2xl mb-2"></i>
+                            <span class="text-sm font-medium text-warning text-center">Video Consultation</span>
+                        </a>
+                        <a href="ai_health_assistant_chatbot.html" class="flex flex-col items-center p-4 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors duration-200">
+                            <i class="fas fa-robot text-primary text-2xl mb-2"></i>
+                            <span class="text-sm font-medium text-primary text-center">AI Health Assistant</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Active Consultation Alert -->
+                <div class="bg-primary-50 border border-primary-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-primary p-2 rounded-full">
+                                <i class="fas fa-video text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-primary">Telemedicine Consultation Available</p>
+                                <p class="text-sm text-text-secondary">Dr. Michael Chen is ready for your appointment</p>
+                            </div>
+                        </div>
+                        <a href="telemedicine_consultation.html" class="btn-primary">
+                            <i class="fas fa-video mr-2"></i>
+                            Join Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Health Metrics Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Health Trends</h3>
+                        <div class="flex space-x-2">
+                            <button class="text-xs px-3 py-1 bg-primary text-white rounded-md">7D</button>
+                            <button class="text-xs px-3 py-1 bg-gray-100 text-text-secondary rounded-md hover:bg-gray-200">30D</button>
+                            <button class="text-xs px-3 py-1 bg-gray-100 text-text-secondary rounded-md hover:bg-gray-200">90D</button>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3 p-3 bg-secondary-50 rounded-lg">
+                            <div class="bg-secondary p-2 rounded-full">
+                                <i class="fas fa-check text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Lab Results Available</p>
+                                <p class="text-xs text-text-secondary">Blood work results from Dec 12 are now available</p>
+                                <p class="text-xs text-text-secondary mt-1">2 hours ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 p-3 bg-primary-50 rounded-lg">
+                            <div class="bg-primary p-2 rounded-full">
+                                <i class="fas fa-calendar text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Appointment Confirmed</p>
+                                <p class="text-xs text-text-secondary">Follow-up with Dr. Chen on Dec 18 at 2:30 PM</p>
+                                <p class="text-xs text-text-secondary mt-1">1 day ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 p-3 bg-warning/10 rounded-lg">
+                            <div class="bg-warning p-2 rounded-full">
+                                <i class="fas fa-pills text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Medication Reminder</p>
+                                <p class="text-xs text-text-secondary">Don't forget to take your evening medication</p>
+                                <p class="text-xs text-text-secondary mt-1">3 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Sidebar -->
+            <div class="space-y-6">
+                <!-- Medication Tracker -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Today's Medications</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-secondary-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-secondary p-2 rounded-full">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Lisinopril 10mg</p>
+                                    <p class="text-xs text-text-secondary">Taken at 8:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-warning/10 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-warning p-2 rounded-full">
+                                    <i class="fas fa-clock text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Metformin 500mg</p>
+                                    <p class="text-xs text-text-secondary">Due at 6:00 PM</p>
+                                </div>
+                            </div>
+                            <button class="text-xs px-2 py-1 bg-warning text-white rounded">Mark Taken</button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-accent-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-accent p-2 rounded-full">
+                                    <i class="fas fa-exclamation text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Vitamin D3</p>
+                                    <p class="text-xs text-text-secondary">Overdue since 12:00 PM</p>
+                                </div>
+                            </div>
+                            <button class="text-xs px-2 py-1 bg-accent text-white rounded">Take Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Appointments -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Upcoming Appointments</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 border border-border rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-medium text-text-primary">Dr. Michael Chen</p>
+                                <span class="text-xs bg-primary-50 text-primary px-2 py-1 rounded">Cardiology</span>
+                            </div>
+                            <p class="text-xs text-text-secondary">Dec 18, 2025 at 2:30 PM</p>
+                            <p class="text-xs text-text-secondary">Follow-up consultation</p>
+                        </div>
+                        
+                        <div class="p-3 border border-border rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-medium text-text-primary">Dr. Sarah Williams</p>
+                                <span class="text-xs bg-secondary-50 text-secondary px-2 py-1 rounded">Dermatology</span>
+                            </div>
+                            <p class="text-xs text-text-secondary">Dec 22, 2025 at 10:00 AM</p>
+                            <p class="text-xs text-text-secondary">Annual skin check</p>
+                        </div>
+                    </div>
+                    <a href="appointment_scheduling.html" class="block text-center text-sm text-primary hover:text-primary-700 mt-4">View All Appointments</a>
+                </div>
+
+                <!-- Health Goals -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Health Goals</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-medium text-text-primary">Daily Steps</p>
+                                <span class="text-sm text-text-secondary">8,432 / 10,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full" style="width: 84%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-medium text-text-primary">Water Intake</p>
+                                <span class="text-sm text-text-secondary">6 / 8 glasses</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-medium text-text-primary">Sleep</p>
+                                <span class="text-sm text-text-secondary">7.5 / 8 hours</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-warning h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contacts -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Emergency Contacts</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Emergency Services</p>
+                                <p class="text-xs text-text-secondary">911</p>
+                            </div>
+                            <button class="bg-accent text-white px-3 py-1 rounded text-xs hover:bg-accent-700">Call</button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Dr. Michael Chen</p>
+                                <p class="text-xs text-text-secondary">(555) 123-4567</p>
+                            </div>
+                            <button class="bg-primary text-white px-3 py-1 rounded text-xs hover:bg-primary-700">Call</button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">John Johnson (Spouse)</p>
+                                <p class="text-xs text-text-secondary">(555) 987-6543</p>
+                            </div>
+                            <button class="bg-secondary text-white px-3 py-1 rounded text-xs hover:bg-secondary-700">Call</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border shadow-lg">
+        <div class="flex justify-around py-2">
+            <a href="patient_dashboard.html" class="flex flex-col items-center py-2 px-3 text-primary">
+                <i class="fas fa-home text-lg"></i>
+                <span class="text-xs mt-1">Dashboard</span>
+            </a>
+            <a href="appointment_scheduling.html" class="flex flex-col items-center py-2 px-3 text-text-secondary">
+                <i class="fas fa-calendar text-lg"></i>
+                <span class="text-xs mt-1">Appointments</span>
+            </a>
+            <a href="#" class="flex flex-col items-center py-2 px-3 text-text-secondary">
+                <i class="fas fa-comments text-lg"></i>
+                <span class="text-xs mt-1">Messages</span>
+            </a>
+            <a href="#" class="flex flex-col items-center py-2 px-3 text-text-secondary">
+                <i class="fas fa-user text-lg"></i>
+                <span class="text-xs mt-1">Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer Spacer for Mobile -->
+    <div class="md:hidden h-20"></div>
+
+    <script>
+        // Health Chart Implementation
+        const ctx = document.getElementById('healthChart').getContext('2d');
+        const healthChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Dec 8', 'Dec 9', 'Dec 10', 'Dec 11', 'Dec 12', 'Dec 13', 'Dec 14'],
+                datasets: [{
+                    label: 'Blood Pressure (Systolic)',
+                    data: [125, 122, 118, 120, 124, 119, 120],
+                    borderColor: '#2563EB',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Heart Rate',
+                    data: [72, 75, 68, 70, 73, 69, 71],
+                    borderColor: '#059669',
+                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Medication reminder functionality
+        document.querySelectorAll('.bg-warning').forEach(button => {
+            if (button.textContent.trim() === 'Mark Taken') {
+                button.addEventListener('click', function() {
+                    const container = this.closest('.bg-warning\\/10');
+                    container.classList.remove('bg-warning/10');
+                    container.classList.add('bg-secondary-50');
+                    
+                    const icon = container.querySelector('.bg-warning');
+                    icon.classList.remove('bg-warning');
+                    icon.classList.add('bg-secondary');
+                    icon.querySelector('i').classList.remove('fa-clock');
+                    icon.querySelector('i').classList.add('fa-check');
+                    
+                    this.textContent = 'Taken';
+                    this.classList.remove('bg-warning');
+                    this.classList.add('bg-secondary');
+                    this.disabled = true;
+                });
+            }
+        });
+
+        // Emergency contact functionality
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.trim() === 'Call') {
+                button.addEventListener('click', function() {
+                    const phoneNumber = this.parentElement.querySelector('.text-xs').textContent;
+                    alert(`Calling ${phoneNumber}...`);
+                });
+            }
+        });
+
+        // Notification handling
+        document.querySelector('.fa-bell').parentElement.addEventListener('click', function() {
+            alert('You have 3 new notifications:\n1. Lab results available\n2. Appointment reminder\n3. Medication due');
+        });
+
+        // User menu functionality
+        document.querySelector('.fa-chevron-down').parentElement.addEventListener('click', function() {
+            alert('User menu options:\n- Profile Settings\n- Health Records\n- Privacy Settings\n- Logout');
+        });
+
+        // Symptom logging functionality
+        document.querySelector('.fa-notes-medical').parentElement.addEventListener('click', function() {
+            const symptoms = prompt('Please describe your symptoms:');
+            if (symptoms) {
+                alert('Symptoms logged successfully. Your healthcare provider will be notified.');
+            }
+        });
+
+        // Provider messaging functionality
+        document.querySelector('.fa-comments').parentElement.addEventListener('click', function() {
+            const message = prompt('Send a message to your healthcare provider:');
+            if (message) {
+                alert('Message sent successfully. You will receive a response within 24 hours.');
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

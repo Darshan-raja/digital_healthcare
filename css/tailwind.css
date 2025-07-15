@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors */
+  --color-primary: #2563EB; /* blue-600 - Medical blue for trust and professionalism */
+  --color-primary-50: #EFF6FF; /* blue-50 */
+  --color-primary-100: #DBEAFE; /* blue-100 */
+  --color-primary-500: #3B82F6; /* blue-500 */
+  --color-primary-600: #2563EB; /* blue-600 */
+  --color-primary-700: #1D4ED8; /* blue-700 */
+  
+  /* Secondary Colors */
+  --color-secondary: #059669; /* emerald-600 - Healthcare green for wellness */
+  --color-secondary-50: #ECFDF5; /* emerald-50 */
+  --color-secondary-100: #D1FAE5; /* emerald-100 */
+  --color-secondary-500: #10B981; /* emerald-500 */
+  --color-secondary-600: #059669; /* emerald-600 */
+  --color-secondary-700: #047857; /* emerald-700 */
+  
+  /* Accent Colors */
+  --color-accent: #DC2626; /* red-600 - Alert red for critical warnings */
+  --color-accent-50: #FEF2F2; /* red-50 */
+  --color-accent-100: #FEE2E2; /* red-100 */
+  --color-accent-500: #EF4444; /* red-500 */
+  --color-accent-600: #DC2626; /* red-600 */
+  --color-accent-700: #B91C1C; /* red-700 */
+  
+  /* Background Colors */
+  --color-background: #FAFAFA; /* gray-50 - Warm off-white */
+  --color-surface: #FFFFFF; /* white - Pure white for data containers */
+  
+  /* Text Colors */
+  --color-text-primary: #1F2937; /* gray-800 - Near-black for optimal readability */
+  --color-text-secondary: #6B7280; /* gray-500 - Medium gray for supporting info */
+  
+  /* Status Colors */
+  --color-success: #10B981; /* emerald-500 - Positive green for successful actions */
+  --color-warning: #F59E0B; /* amber-500 - Amber for cautionary information */
+  --color-error: #EF4444; /* red-500 - Softer red for form errors */
+  
+  /* Border Colors */
+  --color-border: #E5E7EB; /* gray-200 - Light gray for data separation */
+  --color-border-light: #F3F4F6; /* gray-100 */
+  
+  /* Shadow Colors */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Styles */
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .font-data {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-md font-medium transition-all duration-200 ease-in-out;
+    @apply hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white px-4 py-2 rounded-md font-medium transition-all duration-200 ease-in-out;
+    @apply hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2;
+  }
+  
+  .card {
+    @apply bg-surface rounded-lg shadow border border-border p-6;
+  }
+  
+  .form-input {
+    @apply w-full px-3 py-2 border border-border rounded-md bg-surface text-text-primary;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .alert-success {
+    @apply bg-success/10 border border-success/20 text-success rounded-md p-4;
+  }
+  
+  .alert-warning {
+    @apply bg-warning/10 border border-warning/20 text-warning rounded-md p-4;
+  }
+  
+  .alert-error {
+    @apply bg-error/10 border border-error/20 text-error rounded-md p-4;
+  }
+  
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Micro-interactions */
+@layer utilities {
+  .hover-lift {
+    @apply transition-transform duration-200 ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    @apply transform -translate-y-1;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+}
