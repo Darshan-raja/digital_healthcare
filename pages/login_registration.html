@@ -369,16 +369,16 @@
         // Authentication handlers
         function handleLogin(event) {
             event.preventDefault();
-            
+            const form = event.target.closest('form');
+            const email = form.loginEmail.value;
+            // Simulate authentication (replace with real API call in production)
+            // Here, just store the email as the username for demo
+            localStorage.setItem('loggedInUser', email);
             // Show loading state
             const button = event.target;
-            const originalText = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
             button.disabled = true;
-            
-            // Simulate authentication
             setTimeout(() => {
-                // Mock successful login - redirect to patient dashboard
                 window.location.href = 'patient_dashboard.html';
             }, 2000);
         }

@@ -55,8 +55,7 @@
                     <!-- User Menu -->
                     <div class="relative">
                         <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors duration-200">
-                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sarah Johnson" class="h-8 w-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
-                            <span class="hidden md:block text-sm font-medium">Sarah Johnson</span>
+                            <span id="userMenuName" class="hidden md:block text-sm font-medium"></span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                     </div>
@@ -510,6 +509,20 @@
                 alert('Message sent successfully. You will receive a response within 24 hours.');
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Display logged-in user's name in welcome message
+    const user = localStorage.getItem('loggedInUser') || 'User';
+    const welcomeEl = document.querySelector('h2.text-2xl');
+    if (welcomeEl) {
+        welcomeEl.textContent = `Welcome back, ${user.split('@')[0].charAt(0).toUpperCase() + user.split('@')[0].slice(1)}!`;
+    }
+    // Display user name in user menu
+    const userMenuName = document.getElementById('userMenuName');
+    if (userMenuName) {
+        userMenuName.textContent = user.split('@')[0].charAt(0).toUpperCase() + user.split('@')[0].slice(1);
+    }
+});
     </script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
 </body>
