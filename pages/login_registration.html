@@ -404,7 +404,7 @@
             button.disabled = true;
 
             // Send data to backend
-            fetch('http://localhost:5000/api/register', {
+            fetch('/.netlify/functions/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)

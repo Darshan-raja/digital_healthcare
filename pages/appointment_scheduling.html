@@ -129,7 +129,7 @@
                                     <p class="text-sm text-text-secondary mt-1">Regular health examination and preventive care</p>
                                     <div class="flex items-center space-x-4 mt-2 text-xs text-text-secondary">
                                         <span><i class="fas fa-clock mr-1"></i>30 minutes</span>
-                                        <span><i class="fas fa-dollar-sign mr-1"></i>$150</span>
+                                        <span><i class="fas fa-rupee-sign mr-1"></i>1500</span>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                                     <p class="text-sm text-text-secondary mt-1">Review previous treatment and progress</p>
                                     <div class="flex items-center space-x-4 mt-2 text-xs text-text-secondary">
                                         <span><i class="fas fa-clock mr-1"></i>20 minutes</span>
-                                        <span><i class="fas fa-dollar-sign mr-1"></i>$100</span>
+                                        <span><i class="fas fa-rupee-sign mr-1"></i>1000</span>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                     <p class="text-sm text-text-secondary mt-1">Non-emergency urgent medical attention</p>
                                     <div class="flex items-center space-x-4 mt-2 text-xs text-text-secondary">
                                         <span><i class="fas fa-clock mr-1"></i>45 minutes</span>
-                                        <span><i class="fas fa-dollar-sign mr-1"></i>$200</span>
+                                        <span><i class="fas fa-rupee-sign mr-1"></i>2000</span>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
                                     <p class="text-sm text-text-secondary mt-1">Virtual consultation from home</p>
                                     <div class="flex items-center space-x-4 mt-2 text-xs text-text-secondary">
                                         <span><i class="fas fa-clock mr-1"></i>25 minutes</span>
-                                        <span><i class="fas fa-dollar-sign mr-1"></i>$120</span>
+                                        <span><i class="fas fa-rupee-sign mr-1"></i>1200</span>
                                     </div>
                                 </div>
                             </div>
@@ -439,7 +439,7 @@
                                         <p class="text-sm text-text-secondary mt-1">Blue Cross Blue Shield - Premium Plan</p>
                                         <div class="mt-2 text-sm">
                                             <span class="text-text-primary">Copay: </span>
-                                            <span class="font-medium text-secondary">$25.00</span>
+                                            <span class="font-medium text-secondary">₹250.00</span>
                                         </div>
                                     </div>
                                 </div>
@@ -488,7 +488,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-text-secondary">Copay:</span>
-                                <span class="font-medium text-secondary">$25.00</span>
+                                <span class="font-medium text-secondary">₹250.00</span>
                             </div>
                         </div>
                     </div>
@@ -504,6 +504,9 @@
                             </button>
                             <button class="flex-1 btn-secondary py-2 text-sm">
                                 <i class="fab fa-microsoft mr-2"></i> Outlook
+                            </button>
+                            <button class="flex-1 btn-primary py-2 text-sm bg-purple-600 hover:bg-purple-700" onclick="handlePayment('UPI')">
+                                <i class="fas fa-qrcode mr-2"></i> Pay with UPI
                             </button>
                         </div>
                     </div>
@@ -558,7 +561,7 @@
                             <i class="fas fa-dollar-sign text-secondary mt-1"></i>
                             <div>
                                 <p class="font-medium text-text-primary">Late Cancellation</p>
-                                <p>$50 fee for cancellations within 24 hours.</p>
+                                <p>₹500 fee for cancellations within 24 hours.</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-2">
@@ -617,6 +620,31 @@
             </div>
         </div>
     </footer>
+
+    <!-- Payment Notification -->
+    <div id="paymentNotification" class="hidden fixed bottom-4 right-4 w-full max-w-sm p-4 bg-surface rounded-lg shadow-lg border border-border transition-transform transform translate-y-full">
+        <div class="flex items-start space-x-3">
+            <div id="paymentIcon" class="w-10 h-10 rounded-full flex items-center justify-center">
+                <i id="paymentStatusIcon" class="fas text-white"></i>
+            </div>
+            <div class="flex-1">
+                <h4 id="paymentStatus" class="font-medium text-text-primary"></h4>
+                <p class="text-sm text-text-secondary">
+                    Amount: <span id="paymentAmount" class="font-medium"></span>
+                </p>
+                <p class="text-xs text-text-secondary">
+                    <span id="paymentDateTime"></span> via <span id="paymentMethod"></span>
+                </p>
+            </div>
+            <button onclick="closePaymentNotification()" class="text-text-secondary hover:text-primary">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-1 mt-3">
+            <div id="notification-progress" class="bg-primary h-1 rounded-full"></div>
+        </div>
+    </div>
+
 
     <script>
         // Step management
@@ -806,6 +834,84 @@
                     selectedDate = `January ${this.textContent}, 2025`;
                 });
             }
+        });
+    </script>
+    <script>
+        // Payment Notification Logic
+        let notificationTimeout;
+
+        function handlePayment(method) {
+            // Simulate a payment process
+            const isSuccess = Math.random() > 0.1; // 90% success rate
+            const paymentDetails = {
+                status: isSuccess ? 'Success' : 'Failed',
+                amount: '₹250.00',
+                dateTime: new Date().toLocaleString(),
+                method: method
+            };
+            showPaymentNotification(paymentDetails);
+        }
+
+        function showPaymentNotification(details) {
+            const notification = document.getElementById('paymentNotification');
+            const iconContainer = document.getElementById('paymentIcon');
+            const icon = document.getElementById('paymentStatusIcon');
+            const progressBar = document.getElementById('notification-progress');
+
+            document.getElementById('paymentStatus').textContent = `Payment ${details.status}`;
+            document.getElementById('paymentAmount').textContent = details.amount;
+            document.getElementById('paymentDateTime').textContent = details.dateTime;
+            document.getElementById('paymentMethod').textContent = details.method;
+
+            if (details.status === 'Success') {
+                iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center bg-secondary';
+                icon.className = 'fas fa-check text-white';
+            } else {
+                iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center bg-accent';
+                icon.className = 'fas fa-times text-white';
+            }
+
+            notification.classList.remove('hidden', 'translate-y-full');
+            notification.classList.add('translate-y-0');
+            
+            progressBar.style.transition = 'width 5s linear';
+            setTimeout(() => progressBar.style.width = '0%', 50);
+
+            notificationTimeout = setTimeout(closePaymentNotification, 5000);
+        }
+
+        function closePaymentNotification() {
+            const notification = document.getElementById('paymentNotification');
+            notification.classList.add('hidden');
+            document.getElementById('notification-progress').style.width = '100%';
+            clearTimeout(notificationTimeout);
+        }
+    </script>
+    <script>
+        // WebSocket connection for real-time payment status
+        document.addEventListener('DOMContentLoaded', function() {
+            // Use 'wss://' for secure connections (https) and 'ws://' for insecure (http)
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+            // Assuming the WebSocket server is running on the same host, but on port 8080 (for Node.js)
+            // or at /ws/payment_status/ (for Django Channels)
+            const wsUrl = `${wsProtocol}${window.location.hostname}:8080`; // For Node.js/Express
+            // const wsUrl = `${wsProtocol}${window.location.host}/ws/payment_status/`; // For Django Channels
+
+            const socket = new WebSocket(wsUrl);
+
+            socket.onopen = function(e) {
+                console.log("[open] Connection established to WebSocket server");
+            };
+
+            socket.onmessage = function(event) {
+                console.log(`[message] Data received from server: ${event.data}`);
+                const paymentDetails = JSON.parse(event.data);
+                showPaymentNotification(paymentDetails);
+            };
+
+            socket.onclose = function(event) {
+                console.log('[close] Connection died');
+            };
         });
     </script>
 <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>

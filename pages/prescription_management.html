@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prescription Management - HealthCare Portal</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fhealthcare3944back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Header -->
+    <header class="bg-surface border-b border-border shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">HealthCare Portal</h1>
+                        <p class="text-xs text-text-secondary">Prescription Management</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="patient_dashboard.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Dashboard</a>
+                    <a href="appointment_scheduling.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Appointments</a>
+                    <a href="health_records_management.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Health Records</a>
+                    <a href="prescription_management.html" class="text-primary font-medium border-b-2 border-primary pb-1">Prescriptions</a>
+                    <a href="telemedicine_consultation.html" class="text-text-secondary hover:text-primary transition-colors duration-200">Consultations</a>
+                </nav>
+
+                <!-- User Profile & Actions -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-text-secondary hover:text-primary transition-colors duration-200">
+                            <i class="fas fa-bell text-lg"></i>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors duration-200">
+                            <span id="userMenuName" class="hidden md:block text-sm font-medium">Sarah</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-semibold text-text-primary">My Prescriptions</h1>
+                <p class="text-text-secondary mt-1">Manage your medications and request refills.</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <button id="requestRefillBtn" class="btn-primary w-full md:w-auto">
+                    <i class="fas fa-redo mr-2"></i>Request a Refill
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <input type="text" id="searchPrescriptions" class="form-input pl-10" placeholder="Search by medication name or doctor...">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary"></i>
+                </div>
+                <select id="statusFilter" class="form-input">
+                    <option value="all">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="refill-due">Refill Due</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Prescriptions List -->
+        <div class="space-y-6">
+            <!-- Active Prescription -->
+            <div class="card prescription-item" data-status="active" data-name="Lisinopril" data-doctor="Dr. Sarah Smith">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-pills text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Lisinopril 10mg</h3>
+                            <p class="text-sm text-text-secondary">Prescribed by Dr. Sarah Smith</p>
+                            <p class="text-xs text-text-secondary mt-1">Last filled: Nov 15, 2025</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:text-right">
+                        <span class="px-3 py-1 bg-secondary-50 text-secondary text-xs font-medium rounded-full">Active</span>
+                        <p class="text-sm text-text-primary mt-2">3 refills remaining</p>
+                        <p class="text-xs text-text-secondary">Next refill available: Dec 15, 2025</p>
+                    </div>
+                </div>
+                <div class="border-t border-border mt-4 pt-4 flex flex-col md:flex-row md:items-center md:justify-end space-y-2 md:space-y-0 md:space-x-4">
+                    <button class="text-sm text-primary hover:underline">View Details</button>
+                    <button class="btn-secondary text-sm py-1 px-3">Request Refill</button>
+                </div>
+            </div>
+
+            <!-- Refill Due Prescription -->
+            <div class="card prescription-item border-l-4 border-warning" data-status="refill-due" data-name="Metformin" data-doctor="Dr. Michael Chen">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-warning/10 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-prescription-bottle-alt text-warning text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Metformin 500mg</h3>
+                            <p class="text-sm text-text-secondary">Prescribed by Dr. Michael Chen</p>
+                            <p class="text-xs text-text-secondary mt-1">Last filled: Nov 20, 2025</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:text-right">
+                        <span class="px-3 py-1 bg-warning/10 text-warning text-xs font-medium rounded-full">Refill Due</span>
+                        <p class="text-sm text-text-primary mt-2">0 refills remaining</p>
+                        <p class="text-xs text-text-secondary">Last refill was on Nov 20, 2025</p>
+                    </div>
+                </div>
+                <div class="border-t border-border mt-4 pt-4 flex flex-col md:flex-row md:items-center md:justify-end space-y-2 md:space-y-0 md:space-x-4">
+                    <button class="text-sm text-primary hover:underline">View Details</button>
+                    <button class="btn-primary text-sm py-1 px-3">Request Refill Now</button>
+                </div>
+            </div>
+
+            <!-- Inactive Prescription -->
+            <div class="card prescription-item opacity-60" data-status="inactive" data-name="Amoxicillin" data-doctor="Dr. Sarah Smith">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-history text-gray-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-text-primary">Amoxicillin 250mg</h3>
+                            <p class="text-sm text-text-secondary">Prescribed by Dr. Sarah Smith</p>
+                            <p class="text-xs text-text-secondary mt-1">Completed: Sep 10, 2025</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0 md:text-right">
+                        <span class="px-3 py-1 bg-gray-100 text-text-secondary text-xs font-medium rounded-full">Inactive</span>
+                        <p class="text-sm text-text-primary mt-2">Course completed</p>
+                    </div>
+                </div>
+                <div class="border-t border-border mt-4 pt-4 flex flex-col md:flex-row md:items-center md:justify-end space-y-2 md:space-y-0 md:space-x-4">
+                    <button class="text-sm text-primary hover:underline">View History</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pharmacy Information -->
+        <div class="card mt-8">
+            <h3 class="text-xl font-semibold text-text-primary mb-4">Your Pharmacy</h3>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-clinic-medical text-secondary text-2xl"></i>
+                    <div>
+                        <p class="font-medium text-text-primary">CVS Pharmacy - 123 Main St</p>
+                        <p class="text-sm text-text-secondary">(555) 876-5432</p>
+                    </div>
+                </div>
+                <button class="btn-secondary text-sm">Change Pharmacy</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-border py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-sm text-text-secondary">
+                    © 2025 HealthCare Portal. All Rights Reserved.
+                </div>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Terms of Service</a>
+                    <a href="#" class="text-sm text-text-secondary hover:text-primary transition-colors duration-200">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchPrescriptions');
+            const statusFilter = document.getElementById('statusFilter');
+            const prescriptionItems = document.querySelectorAll('.prescription-item');
+
+            function filterPrescriptions() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const status = statusFilter.value;
+
+                prescriptionItems.forEach(item => {
+                    const name = item.dataset.name.toLowerCase();
+                    const doctor = item.dataset.doctor.toLowerCase();
+                    const itemStatus = item.dataset.status;
+
+                    const matchesSearch = name.includes(searchTerm) || doctor.includes(searchTerm);
+                    const matchesStatus = (status === 'all') || (itemStatus === status);
+
+                    if (matchesSearch && matchesStatus) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            searchInput.addEventListener('input', filterPrescriptions);
+            statusFilter.addEventListener('change', filterPrescriptions);
+
+            // Mock user name
+            const user = localStorage.getItem('loggedInUser') || 'User';
+            const userMenuName = document.getElementById('userMenuName');
+            if (userMenuName) {
+                userMenuName.textContent = user.split('@')[0].charAt(0).toUpperCase() + user.split('@')[0].slice(1);
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

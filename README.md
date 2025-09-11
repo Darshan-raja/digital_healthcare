@@ -40,7 +40,9 @@ html_app/
 └── tailwind.config.js     # Tailwind CSS configuration
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; 
+To run
+ live-server digital_healthcare
 
 /* Custom styles */
 .btn-primary {
